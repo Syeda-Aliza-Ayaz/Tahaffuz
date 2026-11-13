@@ -10,8 +10,11 @@ PLAN.md
 CHECKLIST.md
 tahaffuz_brief.md
 
-# OS & IDE
-.vscode/
+# Scratch & temporary files
+random.java
+*.tmp
+*.bak
 .idea/
 Thumbs.db
 .DS_Store
+
