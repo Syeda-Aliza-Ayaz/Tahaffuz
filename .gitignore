@@ -1,0 +1,17 @@
+# Temporary / generated archives
+*.zip
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Internal planning & development notes
+PLAN.md
+CHECKLIST.md
+tahaffuz_brief.md
+
+# OS & IDE
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tahaffuz — Scam Message Checker</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="header">
+    <h1 class="title">
+      <span class="title-ur" lang="ur" dir="rtl">تحفظ</span>
+      <span class="title-sep" aria-hidden="true">/</span>
+      <span class="title-en">Tahaffuz</span>
+    </h1>
+    <p class="tagline">Paste an SMS, WhatsApp message or link. Tahaffuz tells you if it looks like a scam, and why.</p>
+  </header>
+
+  <main class="layout">
+    <section class="card input-card" aria-labelledby="input-heading">
+      <h2 id="input-heading" class="card-title">Message</h2>
+      <form id="form">
+        <label for="message" class="visually-hidden">Message to check</label>
+        <textarea id="message" rows="7" maxlength="5000"
+                  placeholder="e.g. Your JazzCash account is blocked. Verify now: bit.ly/xy12 and send your OTP."></textarea>
+        <div class="form-row">
+          <span id="count" class="hint">0 / 5000</span>
+          <span class="hint">Ctrl + Enter to analyse</span>
+        </div>
+        <div class="actions">
+          <button type="submit" id="analyse" class="btn btn-primary">Analyse</button>
+          <button type="button" id="clear" class="btn btn-ghost">Clear</button>
+        </div>
+      </form>
+
+      <div class="examples">
+        <p class="examples-label">Try an example:</p>
+        <div class="example-list">
+          <button type="button" class="chip" data-example="Your JazzCash account is blocked. Verify now: bit.ly/xy12 and send your OTP.">JazzCash OTP scam</button>
+          <button type="button" class="chip" data-example="Mubarak ho! Aap ne 50,000 inaam jeet liya hai. Inaam hasil karne ke liye 500 rupay processing fee 03001234567 par bhejein.">Roman Urdu prize scam</button>
+          <button type="button" class="chip" data-example="Your Ehsaas aid of Rs. 25000 has been approved. Contact Bilal Raza on WhatsApp at 0344-5678901 to receive it.">Ehsaas aid scam</button>
+          <button type="button" class="chip" data-example="Dear customer, enjoy 20% off this weekend. Limited time offer, act now!">Pushy promo (no ask)</button>
+          <button type="button" class="chip" data-example="Your OTP is 4821. Do not share it with anyone.">Genuine bank OTP</button>
+          <button type="button" class="chip" data-example="Send me your account number, I'll transfer your share of the trip money.">Friend asking</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card result-card" aria-labelledby="result-heading" aria-live="polite">
+      <h2 id="result-heading" class="card-title">Result</h2>
+
+      <div id="empty" class="state">
+        <p>Your result will appear here.</p>
+      </div>
+
+      <div id="loading" class="state" hidden>
+        <p>Analysing…</p>
+      </div>
+
+      <div id="error" class="state state-error" hidden role="alert">
+        <p id="error-text"></p>
+      </div>
+
+      <div id="result" hidden>
+        <div class="verdict-row">
+          <span id="verdict" class="badge"></span>
+          <span id="percent" class="percent"></span>
+        </div>
+        <div class="meter" aria-hidden="true">
+          <div id="meter-fill" class="meter-fill"></div>
+          <div class="meter-mark" style="left: 40%"></div>
+          <div class="meter-mark" style="left: 70%"></div>
+        </div>
+        <div class="meter-scale" aria-hidden="true">
+          <span>0</span><span style="left: 40%">40 Suspicious</span><span style="left: 70%">70 Scam</span><span class="end">100</span>
+        </div>
+        <p id="advice" class="advice"></p>
+
+        <p id="note" class="note" hidden></p>
+
+        <div id="diagnosis-box" hidden>
+          <h3 class="reasons-title">Diagnosis</h3>
+          <ul id="diagnosis" class="diagnosis"></ul>
+        </div>
+
+        <h3 class="reasons-title">What to do</h3>
+        <ul id="tips" class="tips"></ul>
+
+        <h3 class="reasons-title">Why</h3>
+        <p id="no-reasons" class="hint" hidden>No scam indicators found in this message.</p>
+        <ol id="reasons" class="reasons"></ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>
+      Rule-based expert system (no machine learning). Each indicator has a certainty factor (CF);
+      they are combined with the MYCIN formula <code>CF = CF₁ + CF₂ × (1 − CF₁)</code>.
+      A <strong>Scam</strong> verdict needs at least one direct request (OTP, details, money, a personal number or a fake site).
+    </p>
+    <p class="hint">NED University · Introduction to AI · Tahaffuz</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
