@@ -11,6 +11,7 @@ CHECKLIST.md
 tahaffuz_brief.md
 
 # Scratch & temporary files
+*.java
 random.java
 *.tmp
 *.bak

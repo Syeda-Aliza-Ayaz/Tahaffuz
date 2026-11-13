@@ -99,11 +99,11 @@ prolog_process = start_prolog()
 # UI CSS (Exact Match of the Original Tahaffuz Style)
 # -------------------------------------------------------------
 CUSTOM_CSS = """
-:root {
+:root, .gradio-container, .dark, body {
   --bg: #f5f7f6;
   --card: #ffffff;
   --text: #1c2421;
-  --muted: #5d6b66;
+  --muted: #4b5563;
   --border: #dde4e1;
   --brand: #0f6b57;
   --safe: #1f8a4c;
@@ -114,11 +114,24 @@ CUSTOM_CSS = """
   --scam-bg: #fbe5e3;
   --radius: 12px;
   --shadow: 0 1px 2px rgba(16, 24, 20, .06), 0 4px 16px rgba(16, 24, 20, .05);
+
+  /* Gradio theme variable overrides (prevent washed out white-on-white text) */
+  --body-text-color: #1c2421 !important;
+  --body-background-fill: #f5f7f6 !important;
+  --background-fill-primary: #ffffff !important;
+  --background-fill-secondary: #fbfcfc !important;
+  --block-background-fill: #ffffff !important;
+  --block-label-text-color: #374151 !important;
+  --block-title-text-color: #111827 !important;
+  --input-background-fill: #fbfcfc !important;
+  --input-border-color: #dde4e1 !important;
+  --input-text-color: #111827 !important;
 }
 
 body, .gradio-container {
-  background: var(--bg) !important;
-  color: var(--text) !important;
+  background: #f5f7f6 !important;
+  background-color: #f5f7f6 !important;
+  color: #1c2421 !important;
   font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Noto Sans", Arial, sans-serif !important;
   font-size: 16px !important;
   line-height: 1.5 !important;
@@ -135,60 +148,73 @@ body, .gradio-container {
   padding: 24px 0 16px 0;
   text-align: left;
 }
-.tahaffuz-title {
+.tahaffuz-title, .tahaffuz-title span {
   margin: 0;
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  flex-wrap: wrap;
-  color: var(--brand);
+  color: #0f6b57 !important;
   font-size: 2.2rem;
   line-height: 1.2;
 }
 .title-ur {
-  font-family: "Urdu Typesetting", "Jameel Noori Nastaleeq", "Noto Nastaliq Urdu", serif;
-  font-size: 2.8rem;
+  font-family: "Urdu Typesetting", "Jameel Noori Nastaleeq", "Noto Nastaliq Urdu", serif !important;
+  font-size: 2.8rem !important;
   font-weight: normal;
+  color: #0f6b57 !important;
 }
-.title-sep { color: var(--border); font-weight: 300; }
-.tahaffuz-tagline { margin: 8px 0 0; color: var(--muted); font-size: 1rem; max-width: 65ch; }
+.title-en {
+  color: #0f6b57 !important;
+  font-weight: 700;
+}
+.title-sep { color: #9ca3af !important; font-weight: 300; margin: 0 6px; }
+.tahaffuz-tagline { margin: 8px 0 0; color: #4b5563 !important; font-size: 1rem; max-width: 65ch; }
 
 /* Cards */
 .card-box {
-  background: var(--card) !important;
-  border: 1px solid var(--border) !important;
-  border-radius: var(--radius) !important;
-  box-shadow: var(--shadow) !important;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  border: 1px solid #dde4e1 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 2px rgba(16, 24, 20, .06), 0 4px 16px rgba(16, 24, 20, .05) !important;
   padding: 22px !important;
 }
 .card-label {
-  margin: 0 0 12px;
-  font-size: .85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  color: var(--muted);
+  margin: 0 0 12px !important;
+  font-size: .85rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: .06em !important;
+  color: #374151 !important;
 }
 
 /* Textarea & Inputs */
+.gradio-container .block,
+.gradio-container .form,
+.gradio-container fieldset {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
 textarea {
   width: 100% !important;
   background: #fbfcfc !important;
-  border: 1px solid var(--border) !important;
+  border: 1px solid #dde4e1 !important;
   border-radius: 8px !important;
-  color: var(--text) !important;
+  color: #111827 !important;
   font-family: inherit !important;
   font-size: 0.95rem !important;
 }
 textarea:focus {
-  outline: 2px solid var(--brand) !important;
+  outline: 2px solid #0f6b57 !important;
+  border-color: #0f6b57 !important;
   background: #fff !important;
 }
 
 /* Buttons */
 .btn-primary {
-  background: var(--brand) !important;
-  color: #fff !important;
+  background: #0f6b57 !important;
+  background-color: #0f6b57 !important;
+  color: #ffffff !important;
   border-radius: 8px !important;
   font-weight: 600 !important;
   border: 1px solid transparent !important;
@@ -200,16 +226,34 @@ textarea:focus {
 }
 .btn-ghost {
   background: transparent !important;
-  color: var(--muted) !important;
-  border: 1px solid var(--border) !important;
+  color: #4b5563 !important;
+  border: 1px solid #dde4e1 !important;
   border-radius: 8px !important;
   font-weight: 600 !important;
   padding: 10px 22px !important;
   cursor: pointer !important;
 }
 .btn-ghost:hover {
-  color: var(--text) !important;
-  border-color: var(--muted) !important;
+  color: #111827 !important;
+  border-color: #9ca3af !important;
+}
+
+/* Examples */
+.gradio-container .examples {
+  margin-top: 12px !important;
+}
+.gradio-container .examples button,
+.gradio-container .examples div[role="button"] {
+  border-radius: 999px !important;
+  border: 1px solid #dde4e1 !important;
+  background: #ffffff !important;
+  color: #1f2937 !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+}
+.gradio-container .examples button:hover {
+  border-color: #0f6b57 !important;
+  color: #0f6b57 !important;
 }
 
 /* Result Card Components */
@@ -236,13 +280,13 @@ textarea:focus {
   font-variant-numeric: tabular-nums;
 }
 
-.v-safe .badge { background: var(--safe-bg); color: var(--safe); }
-.v-suspicious .badge { background: var(--warn-bg); color: var(--warn); }
-.v-scam .badge { background: var(--scam-bg); color: var(--scam); }
+.v-safe .badge { background: #e5f4eb !important; color: #1f8a4c !important; }
+.v-suspicious .badge { background: #fdf1dc !important; color: #b26a00 !important; }
+.v-scam .badge { background: #fbe5e3 !important; color: #c2312a !important; }
 
-.v-safe .percent { color: var(--safe); }
-.v-suspicious .percent { color: var(--warn); }
-.v-scam .percent { color: var(--scam); }
+.v-safe .percent { color: #1f8a4c !important; }
+.v-suspicious .percent { color: #b26a00 !important; }
+.v-scam .percent { color: #c2312a !important; }
 
 /* Meter */
 .meter {
@@ -258,9 +302,9 @@ textarea:focus {
   border-radius: 999px;
   transition: width .4s ease;
 }
-.v-safe .meter-fill { background: var(--safe); }
-.v-suspicious .meter-fill { background: var(--warn); }
-.v-scam .meter-fill { background: var(--scam); }
+.v-safe .meter-fill { background: #1f8a4c !important; }
+.v-suspicious .meter-fill { background: #b26a00 !important; }
+.v-scam .meter-fill { background: #c2312a !important; }
 
 .meter-mark {
   position: absolute;
@@ -273,9 +317,9 @@ textarea:focus {
   height: 18px;
   margin-top: 4px;
   font-size: .75rem;
-  color: var(--muted);
+  color: #4b5563 !important;
 }
-.meter-scale span { position: absolute; white-space: nowrap; }
+.meter-scale span { position: absolute; white-space: nowrap; color: #4b5563 !important; }
 .meter-scale span:first-child { left: 0; }
 .meter-scale span[style] { transform: translateX(-50%); }
 .meter-scale .end { right: 0; }
@@ -284,17 +328,17 @@ textarea:focus {
   margin: 14px 0 0;
   font-weight: 600;
   font-size: 1rem;
-  color: var(--text);
+  color: #111827 !important;
 }
 
 .note {
   margin: 12px 0 0;
   padding: 10px 12px;
-  border-left: 4px solid var(--warn);
-  background: var(--warn-bg);
+  border-left: 4px solid #b26a00;
+  background: #fdf1dc;
   border-radius: 6px;
   font-size: .92rem;
-  color: #78350f;
+  color: #78350f !important;
 }
 
 /* Diagnosis */
@@ -311,10 +355,11 @@ textarea:focus {
   padding: 10px 12px;
   border-radius: 8px;
   background: #f3f6f5;
+  color: #111827 !important;
 }
-.v-scam .diagnosis li { background: var(--scam-bg); }
-.v-suspicious .diagnosis li { background: var(--warn-bg); }
-.diagnosis-desc { color: var(--muted); font-size: .9rem; }
+.v-scam .diagnosis li { background: #fbe5e3 !important; }
+.v-suspicious .diagnosis li { background: #fdf1dc !important; }
+.diagnosis-desc { color: #4b5563 !important; font-size: .9rem; }
 .tag.tag-main {
   margin-left: 8px;
   font-size: .72rem;
@@ -327,13 +372,13 @@ textarea:focus {
   position: relative;
   padding-left: 22px;
   font-size: .95rem;
-  color: var(--text);
+  color: #111827 !important;
 }
 .tips li::before {
   content: "✓";
   position: absolute;
   left: 2px;
-  color: var(--brand);
+  color: #0f6b57;
   font-weight: 700;
 }
 
@@ -344,7 +389,7 @@ textarea:focus {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .06em;
-  color: var(--muted);
+  color: #374151 !important;
 }
 .reasons {
   list-style: none;
@@ -354,10 +399,10 @@ textarea:focus {
   gap: 10px;
 }
 .reason {
-  border: 1px solid var(--border);
+  border: 1px solid #dde4e1 !important;
   border-radius: 8px;
   padding: 10px 12px;
-  background: #fff;
+  background: #ffffff !important;
 }
 .reason-top {
   display: flex;
@@ -365,14 +410,14 @@ textarea:focus {
   gap: 12px;
   align-items: baseline;
 }
-.reason-text { font-weight: 600; color: var(--text); font-size: 0.95rem; }
+.reason-text { font-weight: 600; color: #111827 !important; font-size: 0.95rem; }
 .reason-plus {
   font-variant-numeric: tabular-nums;
   font-weight: 700;
   white-space: nowrap;
-  color: var(--brand);
+  color: #0f6b57 !important;
 }
-.v-scam .reason-plus { color: var(--scam); }
+.v-scam .reason-plus { color: #c2312a !important; }
 
 .reason-bar {
   height: 4px;
@@ -383,11 +428,11 @@ textarea:focus {
 }
 .reason-bar > div {
   height: 100%;
-  background: var(--brand);
+  background: #0f6b57;
   border-radius: 999px;
 }
-.v-scam .reason-bar > div { background: var(--scam); }
-.v-suspicious .reason-bar > div { background: var(--warn); }
+.v-scam .reason-bar > div { background: #c2312a; }
+.v-suspicious .reason-bar > div { background: #b26a00; }
 
 .reason-meta {
   display: flex;
@@ -395,19 +440,19 @@ textarea:focus {
   gap: 6px;
   align-items: center;
   font-size: .82rem;
-  color: var(--muted);
+  color: #4b5563 !important;
 }
 .tag {
   padding: 1px 8px;
   border-radius: 999px;
-  background: #eef3f1;
-  color: var(--text);
+  background: #eef3f1 !important;
+  color: #111827 !important;
   font-family: Consolas, monospace;
   font-size: .8rem;
 }
 .tag-action {
-  background: var(--scam-bg);
-  color: var(--scam);
+  background: #fbe5e3 !important;
+  color: #c2312a !important;
   font-family: inherit;
   font-weight: 600;
 }
@@ -416,16 +461,17 @@ textarea:focus {
 .tahaffuz-footer {
   margin-top: 28px;
   padding: 16px 0 32px 0;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
+  border-top: 1px solid #dde4e1;
+  color: #4b5563 !important;
   font-size: .88rem;
 }
-.tahaffuz-footer p { margin: 6px 0; }
+.tahaffuz-footer p { margin: 6px 0; color: #4b5563 !important; }
 .tahaffuz-footer code {
   font-family: Consolas, monospace;
   background: #eef3f1;
   padding: 1px 5px;
   border-radius: 4px;
+  color: #111827 !important;
 }
 """
 
@@ -578,8 +624,8 @@ def analyse_message(message):
     return "\n".join(html)
 
 EMPTY_STATE_HTML = """
-<div class="result-container" style="color: var(--muted); padding: 32px 0; text-align: center;">
-  <p>Your result will appear here.</p>
+<div class="result-container" style="color: #4b5563 !important; padding: 48px 0; text-align: center;">
+  <p style="color: #4b5563 !important; font-size: 1rem; margin: 0;">Your result will appear here.</p>
 </div>
 """
 
@@ -595,7 +641,7 @@ examples = [
     ["Send me your account number, I'll transfer your share of the trip money."]
 ]
 
-with gr.Blocks(title="Tahaffuz — Scam Message Checker", css=CUSTOM_CSS) as demo:
+with gr.Blocks(title="Tahaffuz — Scam Message Checker", css=CUSTOM_CSS, theme=gr.themes.Default(primary_hue="emerald")) as demo:
     with gr.Column(elem_classes=["tahaffuz-app"]):
         
         # Header
